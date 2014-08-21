@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="#222222"
+              android:gravity="center"
+              tools:context="com.brianysu.alarmclockx.AlarmScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/time_hour_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textSize="100sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-light"
+            android:text="9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textSize="100sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-light"
+            android:text=":" />
+
+        <TextView
+            android:id="@+id/time_min_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textSize="100sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-light"
+            android:text="00" />
+
+        <TextView
+            android:id="@+id/time_seconds_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:layout_gravity="bottom"
+            android:fontFamily="sans-serif-light"
+            android:text="34"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/time_alarm_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_time"/>
+
+        <TextView
+            android:id="@+id/time_next_alarm_hour_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-light"
+            android:text="6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-light"
+            android:text=":" />
+
+        <TextView
+            android:id="@+id/time_next_alarm_min_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-light"
+            android:text="00" />
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/AppThemeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:text="Swipe Up to Dismiss"/>
+</LinearLayout>

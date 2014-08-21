@@ -3,10 +3,14 @@ package com.brianysu.alarmclockx;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -16,6 +20,7 @@ import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int ALARM_LOADER = 0;
+    static final int CREATE_NEW_ALARM_REQUEST = 0;
 
     private static final String[] ALARM_COLUMNS = {
             AlarmEntry._ID,
@@ -86,6 +91,7 @@ public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -100,4 +106,20 @@ public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCall
         return mRootView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.alarmsfragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_create_alarm) {
+            Intent i = new Intent(getActivity(), CreateAlarmActivity.class);
+            startActivityForResult(i, CREATE_NEW_ALARM_REQUEST);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

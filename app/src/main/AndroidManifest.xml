@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brianysu.alarmclockx" >
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -18,6 +21,16 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".AlarmReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="AlarmService"
+            android:enabled="true" />
+
         <provider
             android:name=".data.AlarmProvider"
             android:authorities="@string/content_authority"
@@ -27,11 +40,15 @@
         <activity
             android:name=".CreateAlarmActivity"
             android:label="@string/title_activity_create_alarm"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.brianysu.alarmclockx.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AlarmScreen"
+            android:label="@string/title_activity_alarm_screen" >
         </activity>
     </application>
 

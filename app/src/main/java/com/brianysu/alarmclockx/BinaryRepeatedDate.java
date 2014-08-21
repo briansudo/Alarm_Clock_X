@@ -11,6 +11,16 @@ import java.util.List;
  **/
 public class BinaryRepeatedDate {
 
+    int[] daysOfWeekStrings = {
+            R.string.sunday,
+            R.string.monday,
+            R.string.tuesday,
+            R.string.wednesday,
+            R.string.thursday,
+            R.string.friday,
+            R.string.saturday
+    };
+
     /** Representation of days repeated. **/
     private int days;
 
@@ -99,8 +109,7 @@ public class BinaryRepeatedDate {
 
     public List<String> getDays() {
         List<String> daysRepeated = new ArrayList<String>();
-        String[] daysOfWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-            "Saturday"};
+        String[] daysOfWeek = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         int mask = Integer.parseInt("1000000", 2);
         int daysCopy = days;
         for (int i = 0; i < 7; i++) {
@@ -120,6 +129,19 @@ public class BinaryRepeatedDate {
     /** Returns true if dayOfWeek = Calendar.SUNDAY for example is repeated. **/
     public boolean isRepeated(int dayOfWeek) {
         return (days & (Integer.parseInt("1000000") >>> (dayOfWeek - 1))) > 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder b = new StringBuilder();
+        List<String> days = getDays();
+        for (int i = 0; i < days.size(); i++) {
+            b.append(days.get(i));
+            if (i + 1 < days.size()) {
+                b.append(", ");
+            }
+        }
+        return b.toString();
     }
 
 }

@@ -9,7 +9,7 @@ import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 public class AlarmDbHelper extends SQLiteOpenHelper {
 
     // If the database schema is changed, this must be incremented
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public static final String DATABASE_NAME = "alarm.db";
 

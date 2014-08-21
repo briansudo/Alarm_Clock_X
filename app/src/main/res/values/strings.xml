@@ -35,4 +35,14 @@
     <string name="list_item_alarm_off">OFF</string>
     <string name="list_item_alarm_on">ON</string>
 
+    <!-- Strings for Day Of Week -->
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="title_activity_alarm_screen">AlarmScreen</string>
+
 </resources>

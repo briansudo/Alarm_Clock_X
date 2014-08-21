@@ -1,7 +1,9 @@
 package com.brianysu.alarmclockx;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +11,13 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brianysu.alarmclockx.data.AlarmContract;
+import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
+
 
 public class AlarmsAdapter extends CursorAdapter {
 
+    private static final String TAG = AlarmsAdapter.class.getSimpleName();
     /**
      * Cache of the children views for a forecast list item.
      */
@@ -63,7 +69,9 @@ public class AlarmsAdapter extends CursorAdapter {
         viewHolder.minView.setText(Utility.formatMin(min));
         viewHolder.nameView.setText(name);
 
+
         BinaryRepeatedDate daysRepeated = new BinaryRepeatedDate(repeated);
+        viewHolder.repeatedView.setText(daysRepeated.toString());
 
         if (enabled == 1) {
             configOnTextView(context, viewHolder);
@@ -77,6 +85,7 @@ public class AlarmsAdapter extends CursorAdapter {
             @Override
             public void onClick(View view) {
                 AlarmUtility.deleteAlarmById(c, id);
+                AlarmUtility.setAlarms(c);
             }
         });
 
@@ -84,12 +93,28 @@ public class AlarmsAdapter extends CursorAdapter {
             @Override
             public void onClick(View view) {
                 if (enabled == 1) {
-                    configOffTextView(c, viewHolder);
+                    updateEnabled(c, viewHolder, id, false);
                 } else {
-                    configOnTextView(c, viewHolder);
+                    updateEnabled(c, viewHolder, id, true);
                 }
             }
         });
+    }
+
+    private void updateEnabled(Context context, ViewHolder viewHolder, int alarmId, boolean enabled) {
+        ContentValues values = new ContentValues();
+        values.put(AlarmEntry._ID, alarmId);
+        values.put(AlarmEntry.COLUMN_ENABLED, enabled);
+        int result = context.getContentResolver().update(
+                AlarmContract.AlarmEntry.CONTENT_URI,
+                values,
+                AlarmEntry._ID + " = '" + alarmId + "'",
+                null
+        );
+        Log.d(TAG, "Alarm " + alarmId + " updated.");
+        if (enabled) configOnTextView(context, viewHolder);
+        else configOffTextView(context, viewHolder);
+        AlarmUtility.setAlarms(context);
     }
 
     private void configOffTextView(Context context, ViewHolder viewHolder) {
