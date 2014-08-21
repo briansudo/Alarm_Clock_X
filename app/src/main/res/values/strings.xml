@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Alarm Clock X</string>
+    <string name="content_authority">"com.brianysu.alarmclockx"</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Menu Strings -->
+    <string name="action_settings">Settings</string>
+    <string name="action_create_alarm">Create New Alarm</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings for TimeFragment -->
+
+
+    <!-- Strings for CreateAlarmFragment -->
+    <string name="title_activity_create_alarm">Create New Alarm</string>
+    <string name="create_alarm_name_hint">Alarm Name (Optional)</string>
+    <string name="create_alarm_sunday">S</string>
+    <string name="create_alarm_monday">M</string>
+    <string name="create_alarm_tuesday">T</string>
+    <string name="create_alarm_wednesday">W</string>
+    <string name="create_alarm_thursday">T</string>
+    <string name="create_alarm_friday">F</string>
+    <string name="create_alarm_saturday">S</string>
+    <string name="create_alarm_button">Create Alarm</string>
+    <string name="create_alarm_repeat">Repeat</string>
+    <string name="create_alarm_default">Default</string>
+    <string name="create_alarm_ringtone">Alarm Tone</string>
+
+    <!-- Strings for ListItemAlarm -->
+    <string name="list_item_alarm_off">OFF</string>
+    <string name="list_item_alarm_on">ON</string>
+
+</resources>

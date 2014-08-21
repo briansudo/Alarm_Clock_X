@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Style for App Text -->
+    <style name="AppThemeText">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Style for Day of Week Selectors -->
+    <style name="DayOfWeekSelector" parent="@android:style/TextAppearance.Medium">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+
+</resources>
