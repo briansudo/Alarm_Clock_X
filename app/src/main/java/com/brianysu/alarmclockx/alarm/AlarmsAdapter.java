@@ -1,4 +1,4 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.alarm;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.brianysu.alarmclockx.R;
+import com.brianysu.alarmclockx.other.Utility;
 import com.brianysu.alarmclockx.data.AlarmContract;
 import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 

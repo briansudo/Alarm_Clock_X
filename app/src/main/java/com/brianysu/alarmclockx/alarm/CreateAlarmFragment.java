@@ -1,4 +1,4 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.alarm;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.brianysu.alarmclockx.R;
 import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 
 import java.util.Calendar;

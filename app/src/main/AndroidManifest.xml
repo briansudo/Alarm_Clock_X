@@ -21,14 +21,14 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmReceiver" >
+        <receiver android:name=".alarm.AlarmReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name="AlarmService"
+            android:name=".alarm.AlarmService"
             android:enabled="true" />
 
         <provider
@@ -38,7 +38,7 @@
             android:syncable="true" />
 
         <activity
-            android:name=".CreateAlarmActivity"
+            android:name=".alarm.CreateAlarmActivity"
             android:label="@string/title_activity_create_alarm"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden" >
@@ -47,7 +47,7 @@
                 android:value="com.brianysu.alarmclockx.MainActivity" />
         </activity>
         <activity
-            android:name=".AlarmScreen"
+            android:name=".alarm.AlarmScreen"
             android:label="@string/title_activity_alarm_screen" >
         </activity>
     </application>

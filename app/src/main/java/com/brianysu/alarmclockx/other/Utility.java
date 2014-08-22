@@ -1,4 +1,4 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.other;
 
 public class Utility {
 

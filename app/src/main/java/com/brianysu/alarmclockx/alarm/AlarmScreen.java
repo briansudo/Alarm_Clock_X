@@ -1,4 +1,4 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.alarm;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -21,6 +21,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.brianysu.alarmclockx.other.ClockUpdater;
+import com.brianysu.alarmclockx.R;
+import com.brianysu.alarmclockx.other.Utility;
 import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 
 

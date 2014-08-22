@@ -1,9 +1,11 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.other;
 
 import android.os.CountDownTimer;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.TextView;
+
+import com.brianysu.alarmclockx.R;
 
 public class ClockUpdater extends CountDownTimer {
 

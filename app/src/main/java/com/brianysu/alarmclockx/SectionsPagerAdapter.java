@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
 
+import com.brianysu.alarmclockx.alarm.AlarmsFragment;
+
 import java.util.Locale;
 
 /**

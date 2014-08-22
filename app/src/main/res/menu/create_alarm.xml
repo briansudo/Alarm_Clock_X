@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.brianysu.alarmclockx.CreateAlarmActivity" >
+    tools:context="com.brianysu.alarmclockx.alarm.CreateAlarmActivity" >
 
 </menu>

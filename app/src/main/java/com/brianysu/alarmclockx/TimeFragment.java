@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.brianysu.alarmclockx.other.ClockUpdater;
+
 /**
  * Fragment that displays the time and the next alarm
  */

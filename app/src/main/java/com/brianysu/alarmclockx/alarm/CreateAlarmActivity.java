@@ -1,9 +1,11 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.alarm;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.brianysu.alarmclockx.R;
 
 
 public class CreateAlarmActivity extends Activity {

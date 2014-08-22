@@ -5,7 +5,7 @@
               android:orientation="vertical"
               android:background="#222222"
               android:gravity="center"
-              tools:context="com.brianysu.alarmclockx.AlarmScreen">
+              tools:context="com.brianysu.alarmclockx.alarm.AlarmScreen">
 
     <LinearLayout
         android:layout_width="match_parent"

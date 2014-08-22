@@ -1,4 +1,6 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.alarm;
+
+import com.brianysu.alarmclockx.R;
 
 import java.util.ArrayList;
 import java.util.List;

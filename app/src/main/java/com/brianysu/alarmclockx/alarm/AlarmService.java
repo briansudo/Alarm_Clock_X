@@ -1,4 +1,4 @@
-package com.brianysu.alarmclockx;
+package com.brianysu.alarmclockx.alarm;
 
 import android.app.Service;
 import android.content.Intent;
