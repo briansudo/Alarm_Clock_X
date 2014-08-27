@@ -16,12 +16,15 @@ import com.brianysu.alarmclockx.other.Utility;
 import com.brianysu.alarmclockx.data.AlarmContract;
 import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 
-
+/**
+ * Populate the views of the alarm list items
+ */
 public class AlarmsAdapter extends CursorAdapter {
 
     private static final String TAG = AlarmsAdapter.class.getSimpleName();
+
     /**
-     * Cache of the children views for a forecast list item.
+     * Cache of the children views for an alarm list item.
      */
     public static class ViewHolder {
         public final TextView hourView;
@@ -51,7 +54,6 @@ public class AlarmsAdapter extends CursorAdapter {
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         view.setTag(viewHolder);
-
         return view;
     }
 
@@ -67,22 +69,26 @@ public class AlarmsAdapter extends CursorAdapter {
         int repeated = cursor.getInt(AlarmsFragment.COL_ALARM_REPEATED);
         final int enabled = cursor.getInt(AlarmsFragment.COL_ALARM_ENABLED);
 
+        // Set the time and name views of the list view
         viewHolder.hourView.setText(Utility.formatHour(hour));
         viewHolder.minView.setText(Utility.formatMin(min));
         viewHolder.nameView.setText(name);
 
-
+        // Set the repeated section of the list view
         BinaryRepeatedDate daysRepeated = new BinaryRepeatedDate(repeated);
         viewHolder.repeatedView.setText(daysRepeated.toString());
 
+        // Configure the on/off view
         if (enabled == 1) {
             configOnTextView(context, viewHolder);
         } else {
             configOffTextView(context, viewHolder);
         }
 
+        // Final is necessary to use below
         final Context c = context;
 
+        // If alarm is to be deleted, delete the alarm and reset all other alarms
         viewHolder.deleteView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +97,7 @@ public class AlarmsAdapter extends CursorAdapter {
             }
         });
 
+        // If view is enabled/disabled, update the alarm in the db and change the view
         viewHolder.onOffView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +110,9 @@ public class AlarmsAdapter extends CursorAdapter {
         });
     }
 
+    /** When the alarm is enabled/disabled, update the corresponding AlarmEntry in the database
+     * and set the enabled view based on its current state.
+     */
     private void updateEnabled(Context context, ViewHolder viewHolder, int alarmId, boolean enabled) {
         ContentValues values = new ContentValues();
         values.put(AlarmEntry._ID, alarmId);
@@ -113,17 +123,23 @@ public class AlarmsAdapter extends CursorAdapter {
                 AlarmEntry._ID + " = '" + alarmId + "'",
                 null
         );
-        Log.d(TAG, "Alarm " + alarmId + " updated.");
+        Log.d(TAG, "Alarm " + alarmId + " updated. " + result + " alarm updated.");
         if (enabled) configOnTextView(context, viewHolder);
         else configOffTextView(context, viewHolder);
         AlarmUtility.setAlarms(context);
     }
 
+    /**
+     * Set the enabled textview to false state.
+     */
     private void configOffTextView(Context context, ViewHolder viewHolder) {
         viewHolder.onOffView.setText(R.string.list_item_alarm_off);
         viewHolder.onOffView.setTextColor(context.getResources().getColor(R.color.off));
     }
 
+    /**
+     * Set the enabled textview to true state.
+     */
     private void configOnTextView(Context context, ViewHolder viewHolder) {
         viewHolder.onOffView.setText(R.string.list_item_alarm_on);
         viewHolder.onOffView.setTextColor(context.getResources().getColor(R.color.on));

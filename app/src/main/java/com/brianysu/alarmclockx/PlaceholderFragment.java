@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A placeholder fragment containing a simple view.
+ * A placeholder fragment containing a simple view. Temporary views for other pages.
  */
 public class PlaceholderFragment extends Fragment {
     /**

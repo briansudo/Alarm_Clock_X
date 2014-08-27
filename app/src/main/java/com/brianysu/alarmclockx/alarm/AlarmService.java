@@ -16,6 +16,9 @@ public class AlarmService extends Service {
         return null;
     }
 
+    /**
+     * Start the AlarmScreen activity from an explicit intent
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         AlarmUtility.setAlarms(this);

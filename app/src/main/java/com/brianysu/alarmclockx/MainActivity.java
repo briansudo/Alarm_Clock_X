@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.brianysu.alarmclockx.alarm.AlarmUtility;
 import com.brianysu.alarmclockx.data.AlarmContract;
+import com.brianysu.alarmclockx.other.Utility;
 
-
+/**
+ * Handles the tabbed interface of the app.
+ */
 public class MainActivity extends Activity implements ActionBar.TabListener {
 
 
@@ -90,6 +93,8 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
+
+        // Make a toast showing that the new alarm has been created
         if (requestCode == CREATE_NEW_ALARM_REQUEST) {
             if (resultCode == RESULT_OK) {
                 long id = data.getLongExtra(AlarmUtility.ALARM_ID, -1);
@@ -109,12 +114,9 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
                 if (cursor.moveToFirst()) {
                     int hourIndex = cursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_HOUR);
                     int minIndex = cursor.getColumnIndex(AlarmContract.AlarmEntry.COLUMN_MINUTE);
-                    String _hour = cursor.getString(hourIndex);
-                    String _min = cursor.getString(minIndex);
-                    if (_min.length() == 1) {
-                        _min = "0" + _min;
-                    }
-                    String time = String.format("%s:%s", _hour, _min);
+                    int _hour = cursor.getInt(hourIndex);
+                    int _min = cursor.getInt(minIndex);
+                    String time = Utility.formatTime(_hour, _min);
                     Toast.makeText(this, "New alarm created at " + time, Toast.LENGTH_SHORT).show();
                 } else {
                     Log.d(TAG, "Alarm creation failed");

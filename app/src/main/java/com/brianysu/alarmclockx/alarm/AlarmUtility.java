@@ -6,6 +6,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.util.Log;
 
 import com.brianysu.alarmclockx.data.AlarmContract;
@@ -21,6 +25,38 @@ public class AlarmUtility {
 
     public static final String ALARM_ID = "alarm_id";
 
+    /**
+     * Start ringing the alarm using TONE and return the MediaPlayer instance
+     */
+    public static MediaPlayer startAlarmRing(Context c, String tone) {
+        MediaPlayer mPlayer = new MediaPlayer();
+        Uri toneUri;
+        try {
+            if (tone != null && !tone.equals("")) {
+                toneUri = Uri.parse(tone);
+            } else {
+                toneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+            }
+        } catch (Exception e) {
+            toneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        }
+        try {
+            if (toneUri != null) {
+                mPlayer.setDataSource(c, toneUri);
+                mPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+                mPlayer.setLooping(true);
+                mPlayer.prepare();
+                mPlayer.start();
+            }
+        } catch (Exception e) {
+            // do nothing
+        }
+        return mPlayer;
+    }
+
+    /**
+     * Delete an alarm from the db using the alarm's id
+     */
     public static int deleteAlarmById(Context c, int id) {
         int result = c.getContentResolver().delete(
                 AlarmEntry.CONTENT_URI,
@@ -76,23 +112,31 @@ public class AlarmUtility {
         }
     }
 
+    /**
+     * Delete all alarms and then set them based on their time
+     */
     public static void setAlarms(Context context) {
         cancelAlarms(context);
         List<AlarmModel> alarms = AlarmUtility.getAlarms(context);
         for (AlarmModel alarm : alarms) {
             if (alarm.isEnabled()) {
                 PendingIntent pIntent = createPendingIntent(context, alarm);
+
+                // calendar is set to the alarm's hour and minute
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(Calendar.HOUR_OF_DAY, alarm.getHour());
                 calendar.set(Calendar.MINUTE, alarm.getMin());
                 calendar.set(Calendar.SECOND, 0);
 
+                // these values are the current time
                 final int nowDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
                 final int nowHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
                 final int nowMinute = Calendar.getInstance().get(Calendar.MINUTE);
+
+                // if the alarm is set, then we're done with this alarm
                 boolean alarmSet = false;
 
-                //First check if it's later in the week
+                // First check if it's later in the week
                 for (int dayOfWeek = Calendar.SUNDAY; dayOfWeek <= Calendar.SATURDAY; dayOfWeek++) {
                     if (alarm.isRepeated(dayOfWeek) &&
                             dayOfWeek >= nowDay &&
@@ -141,6 +185,9 @@ public class AlarmUtility {
         }
     }
 
+    /**
+     * Cancel all alarms.
+     */
     public static void cancelAlarms(Context context) {
         List<AlarmModel> alarms = AlarmUtility.getAlarms(context);
         Log.d(TAG, "Number of alarms: " + alarms.size());
@@ -156,6 +203,9 @@ public class AlarmUtility {
         }
     }
 
+    /**
+     * Create a pending intent for the alarm manager to use to create an alarm.
+     */
     public static PendingIntent createPendingIntent(Context context, AlarmModel model) {
         Intent i = new Intent(context, AlarmService.class);
         i.putExtra(AlarmEntry._ID, model.getId());

@@ -18,21 +18,18 @@ import android.widget.ListView;
 import com.brianysu.alarmclockx.R;
 import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 
+/**
+ * Displays a list of alarms. Loaders are used to automatically update the view when data
+ * in the database changes.
+ */
 public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    // Loader ID
     private static final int ALARM_LOADER = 0;
+    // REQUEST ID for creating a new alarm
     static final int CREATE_NEW_ALARM_REQUEST = 0;
 
-    private static final String[] ALARM_COLUMNS = {
-            AlarmEntry._ID,
-            AlarmEntry.COLUMN_NAME,
-            AlarmEntry.COLUMN_HOUR,
-            AlarmEntry.COLUMN_MINUTE,
-            AlarmEntry.COLUMN_REPEATED_DAYS,
-            AlarmEntry.COLUMN_TONE,
-            AlarmEntry.COLUMN_ENABLED
-    };
-
+    // Indices of the columns queried above, used to retrieve info in AlarmsAdapter
     public static final int COL_ALARM_ID = 0;
     public static final int COL_ALARM_NAME = 1;
     public static final int COL_ALARM_HOUR = 2;
@@ -40,13 +37,6 @@ public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCall
     public static final int COL_ALARM_REPEATED = 4;
     public static final int COL_ALARM_TONE = 5;
     public static final int COL_ALARM_ENABLED = 6;
-
-    private static final int[] ALARM_COLUMNS_TO_VIEW = {
-            R.id.alarm_name_textview,
-            R.id.alarm_hour_textview,
-            R.id.alarm_min_textview,
-            R.id.alarm_repeated_days_textview
-    };
 
     private View mRootView;
     private AlarmsAdapter mAdapter;
@@ -72,7 +62,6 @@ public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.swapCursor(cursor);
-//        AlarmReceiver.setAlarms(getActivity());
     }
 
     @Override
@@ -102,7 +91,6 @@ public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCall
         mRootView = inflater.inflate(R.layout.fragment_alarms, container, false);
         ListView mListView = (ListView) mRootView.findViewById(R.id.listview_alarm);
         mAdapter = new AlarmsAdapter(getActivity(), null, 0);
-
         mListView.setAdapter(mAdapter);
         return mRootView;
     }

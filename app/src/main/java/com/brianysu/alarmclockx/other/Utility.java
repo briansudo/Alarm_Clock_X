@@ -13,4 +13,8 @@ public class Utility {
     public static String formatMin(int min) {
         return formatTwoDigits(min);
     }
+
+    public static String formatTime(int hour, int min) {
+        return String.format("%d:%02d", hour, min);
+    }
 }

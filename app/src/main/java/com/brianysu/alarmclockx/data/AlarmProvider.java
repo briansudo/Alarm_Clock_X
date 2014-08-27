@@ -134,6 +134,9 @@ public class AlarmProvider extends ContentProvider {
         return rowsUpdated;
     }
 
+    /**
+     * Return a URI matcher that determines the uri to query
+     */
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = AlarmContract.CONTENT_AUTHORITY;

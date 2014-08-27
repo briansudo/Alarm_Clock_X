@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import com.brianysu.alarmclockx.R;
 
+/**
+ * Update a time based on the current hour, min, second.
+ */
 public class ClockUpdater extends CountDownTimer {
 
     private static final int LONG_LONG_TIME = 1000 * 60 * 24;
@@ -20,9 +23,11 @@ public class ClockUpdater extends CountDownTimer {
         mSecondsTextView = (TextView) rootView.findViewById(R.id.time_seconds_textview);
     }
 
+    /**
+     * Every second, update the time.
+     */
     @Override
     public void onTick(long l) {
-
         Time t = new Time();
         t.setToNow();
         mHourTextView.setText(String.valueOf(t.hour));

@@ -7,9 +7,11 @@ import android.media.RingtoneManager;
  */
 public class AlarmModel {
 
+    // Refers to AlarmEntry ID in database
     int id;
     String name;
     int hour, min;
+    // Uri of the ringtone chosen for the alarm in String form
     String ringtone;
     int repeatedDays;
     int enabled;

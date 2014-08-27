@@ -58,6 +58,9 @@ public class CreateAlarmFragment extends Fragment {
         return mRootView;
     }
 
+    /**
+     * When create is pressed, create a new alarm.
+     */
     private void configCreateAlarmButton() {
         Button mCreateAlarmButton = (Button) mRootView.findViewById(R.id.create_alarm_button);
         mCreateAlarmButton.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +71,9 @@ public class CreateAlarmFragment extends Fragment {
         });
     }
 
+    /**
+     * View that allows user to pick which dates the alarm will repeat on.
+     */
     private void configRepeatedDaysTextViews() {
         int[] daysOfWeekTextViews = {
                 R.id.sunday_selector_textview,
@@ -96,6 +102,9 @@ public class CreateAlarmFragment extends Fragment {
         }
     }
 
+    /**
+     * When the ringtone option is clicked, create an implicit intent for the user to pick a tone.
+     */
     private void configRingtoneView() {
         final LinearLayout ringToneContainer =
                 (LinearLayout) mRootView.findViewById(R.id.ringtone_selector_view);
@@ -108,12 +117,15 @@ public class CreateAlarmFragment extends Fragment {
         });
     }
 
+    /**
+     * Get the ringtone selected for the alarm.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == getActivity().RESULT_OK) {
             switch (requestCode) {
-                case 1: {
+                case RINGTONE_SELECT: {
                     Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                     mAlarm.setRingtone(uri.toString());
                     TextView ringtoneName =
@@ -130,6 +142,9 @@ public class CreateAlarmFragment extends Fragment {
         }
     }
 
+    /**
+     * Create a new alarm based on the current values of the views.
+     */
     private void createNewAlarm() {
         EditText alarmEditText = (EditText) mRootView.findViewById(R.id.alarm_name_edittext);
         String alarmName = alarmEditText.getText().toString();
