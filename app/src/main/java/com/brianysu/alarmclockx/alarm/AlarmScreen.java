@@ -45,12 +45,7 @@ public class AlarmScreen extends Activity implements
         ActionBar bar = getActionBar();
         if (bar != null) bar.hide();
 
-        Time now = new Time();
-        now.setToNow();
-        TextView nextAlarmHour = (TextView) findViewById(R.id.time_next_alarm_hour_textview);
-        TextView nextAlarmMin = (TextView) findViewById(R.id.time_next_alarm_min_textview);
-        nextAlarmHour.setText(String.valueOf(now.hour));
-        nextAlarmMin.setText(Utility.formatMin(now.minute));
+        setNextAlarmTime();
 
         mDetector = new GestureDetectorCompat(this,this);
         mDetector.setOnDoubleTapListener(this);
@@ -150,6 +145,16 @@ public class AlarmScreen extends Activity implements
             mWakeLock.release();
         }
         sClock.cancel();
+    }
+
+    // Set the next alarm time to now
+    private void setNextAlarmTime() {
+        Time now = new Time();
+        now.setToNow();
+        TextView nextAlarmHour = (TextView) findViewById(R.id.time_next_alarm_hour_textview);
+        TextView nextAlarmMin = (TextView) findViewById(R.id.time_next_alarm_min_textview);
+        nextAlarmHour.setText(String.valueOf(now.hour));
+        nextAlarmMin.setText(Utility.formatMin(now.minute));
     }
 
 
