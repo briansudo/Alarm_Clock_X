@@ -15,6 +15,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "AlarmReceiver onReceive");
-        AlarmUtility.setAlarms(context);
+        AlarmUtility.resetAllAlarms(context);
     }
 }

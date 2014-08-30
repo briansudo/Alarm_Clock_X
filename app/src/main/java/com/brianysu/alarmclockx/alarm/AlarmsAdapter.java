@@ -1,6 +1,5 @@
 package com.brianysu.alarmclockx.alarm;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 
 import com.brianysu.alarmclockx.R;
 import com.brianysu.alarmclockx.other.Utility;
-import com.brianysu.alarmclockx.data.AlarmContract;
-import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 
 /**
  * Populate the views of the alarm list items
@@ -92,8 +89,7 @@ public class AlarmsAdapter extends CursorAdapter {
         viewHolder.deleteView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlarmUtility.deleteAlarmById(c, id);
-                AlarmUtility.setAlarms(c);
+                AlarmUtility.deleteAlarm(c, id);
             }
         });
 
@@ -114,19 +110,13 @@ public class AlarmsAdapter extends CursorAdapter {
      * and set the enabled view based on its current state.
      */
     private void updateEnabled(Context context, ViewHolder viewHolder, int alarmId, boolean enabled) {
-        ContentValues values = new ContentValues();
-        values.put(AlarmEntry._ID, alarmId);
-        values.put(AlarmEntry.COLUMN_ENABLED, enabled);
-        int result = context.getContentResolver().update(
-                AlarmContract.AlarmEntry.CONTENT_URI,
-                values,
-                AlarmEntry._ID + " = '" + alarmId + "'",
-                null
-        );
+        int result = AlarmUtility.updateEnabled(context, alarmId, enabled);
         Log.d(TAG, "Alarm " + alarmId + " updated. " + result + " alarm updated.");
-        if (enabled) configOnTextView(context, viewHolder);
-        else configOffTextView(context, viewHolder);
-        AlarmUtility.setAlarms(context);
+        if (enabled) {
+            configOnTextView(context, viewHolder);
+        } else {
+            configOffTextView(context, viewHolder);
+        }
     }
 
     /**

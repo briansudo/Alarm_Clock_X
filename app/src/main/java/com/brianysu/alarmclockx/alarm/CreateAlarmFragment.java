@@ -166,7 +166,7 @@ public class CreateAlarmFragment extends Fragment {
 
         long id = ContentUris.parseId(alarmInsertUri);
 
-        AlarmUtility.setAlarms(getActivity());
+        AlarmUtility.createAlarm(getActivity(), (int) id);
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra(AlarmUtility.ALARM_ID, id);

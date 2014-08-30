@@ -23,14 +23,12 @@ import com.brianysu.alarmclockx.data.AlarmContract.AlarmEntry;
 import com.brianysu.alarmclockx.other.ClockUpdater;
 import com.brianysu.alarmclockx.other.Utility;
 
-/**
- * Activity that gets launched when the alarm rings.
- */
+
 public class AlarmScreen extends Activity implements
-        GestureDetector.OnGestureListener {
+        GestureDetector.OnGestureListener,
+        GestureDetector.OnDoubleTapListener {
 
     private static final String TAG = AlarmScreen.class.getSimpleName();
-
     private GestureDetectorCompat mDetector;
     private PowerManager.WakeLock mWakeLock;
     private MediaPlayer mPlayer;
@@ -42,18 +40,22 @@ public class AlarmScreen extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_screen);
-
-        // Get the root view to access the views within it
         mRootView = getWindow().getDecorView().findViewById(android.R.id.content);
 
-        // Hide the action bar for this view
         ActionBar bar = getActionBar();
         if (bar != null) bar.hide();
 
-        // Set the next alarm time to now
-        setNextAlarmTime();
+        Time now = new Time();
+        now.setToNow();
+        TextView nextAlarmHour = (TextView) findViewById(R.id.time_next_alarm_hour_textview);
+        TextView nextAlarmMin = (TextView) findViewById(R.id.time_next_alarm_min_textview);
+        nextAlarmHour.setText(String.valueOf(now.hour));
+        nextAlarmMin.setText(Utility.formatMin(now.minute));
 
-        //Ensure wakelock release if it hasn't been released within 60 seconds
+        mDetector = new GestureDetectorCompat(this,this);
+        mDetector.setOnDoubleTapListener(this);
+
+        //Ensure wakelock release
         Runnable releaseWakelock = new Runnable() {
 
             @Override
@@ -68,10 +70,32 @@ public class AlarmScreen extends Activity implements
                 }
             }
         };
+
         new Handler().postDelayed(releaseWakelock, WAKELOCK_TIMEOUT);
 
         String tone = getIntent().getStringExtra(AlarmEntry.COLUMN_TONE);
-        mPlayer = AlarmUtility.startAlarmRing(this, tone);
+        mPlayer = new MediaPlayer();
+//        Uri toneUri;
+//        try {
+//            if (tone != null && !tone.equals("")) {
+//                toneUri = Uri.parse(tone);
+//            } else {
+//                toneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+//            }
+//        } catch (Exception e) {
+//            toneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+//        }
+//        try {
+//            if (toneUri != null) {
+//                mPlayer.setDataSource(this, toneUri);
+//                mPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+//                mPlayer.setLooping(true);
+//                mPlayer.prepare();
+//                mPlayer.start();
+//            }
+//        } catch (Exception e) {
+//            // do nothing
+//        }
     }
 
 
@@ -114,7 +138,6 @@ public class AlarmScreen extends Activity implements
             mWakeLock.acquire();
         }
 
-        // Set the time of the clock to the current time
         if (sClock == null) sClock = new ClockUpdater(mRootView);
         sClock.start();
     }
@@ -122,20 +145,55 @@ public class AlarmScreen extends Activity implements
     @Override
     protected void onPause() {
         super.onPause();
-        // Wakelock is needed for the alarm to appear when the phone screen is blank
+
         if (mWakeLock != null && mWakeLock.isHeld()) {
             mWakeLock.release();
         }
         sClock.cancel();
     }
 
-    /** Dismiss the alarm when the user swipes. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        // Be sure to call the superclass implementation
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent event) {
+        return true;
+    }
+
+    @Override
+    public boolean onFling(MotionEvent event1, MotionEvent event2,
+                           float velocityX, float velocityY) {
+        return true;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent event) {
+    }
+
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
                             float distanceY) {
-        // If the user has swiped up more than 30, then disable the alarm
         if (Math.abs(distanceY) >= 30) {
-            Log.d(TAG, "onScroll: " + distanceY);
+            Log.d(TAG, "onScroll: " + distanceY + " " + e1.toString()+e2.toString());
             mPlayer.stop();
             sClock.cancel();
             finish();
@@ -143,45 +201,27 @@ public class AlarmScreen extends Activity implements
         return true;
     }
 
-    // Set the next alarm time to now
-    private void setNextAlarmTime() {
-        Time now = new Time();
-        now.setToNow();
-        TextView nextAlarmHour = (TextView) findViewById(R.id.time_next_alarm_hour_textview);
-        TextView nextAlarmMin = (TextView) findViewById(R.id.time_next_alarm_min_textview);
-        nextAlarmHour.setText(String.valueOf(now.hour));
-        nextAlarmMin.setText(Utility.formatMin(now.minute));
-    }
-
-
-
-
-
-
-
-    /** Necessary Overrides for GestureListener **/
     @Override
-    public boolean onDown(MotionEvent motionEvent) {
-        return false;
+    public void onShowPress(MotionEvent event) {
     }
 
     @Override
-    public void onShowPress(MotionEvent motionEvent) {
-
+    public boolean onSingleTapUp(MotionEvent event) {
+        return true;
     }
 
     @Override
-    public boolean onSingleTapUp(MotionEvent motionEvent) {
-        return false;
+    public boolean onDoubleTap(MotionEvent event) {
+        return true;
     }
 
     @Override
-    public void onLongPress(MotionEvent motionEvent) {
-
+    public boolean onDoubleTapEvent(MotionEvent event) {
+        return true;
     }
 
     @Override
-    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float v, float v2) {
-        return false;
+    public boolean onSingleTapConfirmed(MotionEvent event) {
+        return true;
     }
 }
