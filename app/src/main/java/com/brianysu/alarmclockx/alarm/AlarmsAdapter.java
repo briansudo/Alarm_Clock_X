@@ -1,5 +1,7 @@
 package com.brianysu.alarmclockx.alarm;
 
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -19,6 +21,9 @@ import com.brianysu.alarmclockx.other.Utility;
 public class AlarmsAdapter extends CursorAdapter {
 
     private static final String TAG = AlarmsAdapter.class.getSimpleName();
+    private static final String EDIT_ALARM_TAG = EditAlarmDialogFragment.class.getSimpleName();
+
+    private FragmentManager fm;
 
     /**
      * Cache of the children views for an alarm list item.
@@ -30,6 +35,7 @@ public class AlarmsAdapter extends CursorAdapter {
         public final TextView repeatedView;
         public final TextView onOffView;
         public final ImageView deleteView;
+        public final ImageView editView;
 
         public ViewHolder(View view) {
             hourView = (TextView) view.findViewById(R.id.alarm_hour_textview);
@@ -38,11 +44,13 @@ public class AlarmsAdapter extends CursorAdapter {
             repeatedView = (TextView) view.findViewById(R.id.alarm_repeated_days_textview);
             onOffView = (TextView) view.findViewById(R.id.alarm_enable_textview);
             deleteView = (ImageView) view.findViewById(R.id.delete_alarm_button);
+            editView = (ImageView) view.findViewById(R.id.edit_alarm_button);
         }
     }
 
-    public AlarmsAdapter(Context context, Cursor c, int flags) {
+    public AlarmsAdapter(Context context, Cursor c, int flags, FragmentManager _fm) {
         super(context, c, flags);
+        fm = _fm;
     }
 
     @Override
@@ -102,6 +110,15 @@ public class AlarmsAdapter extends CursorAdapter {
                 } else {
                     updateEnabled(c, viewHolder, id, true);
                 }
+            }
+        });
+
+        // Open the dialog to edit the alarm
+        viewHolder.editView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment editDialog = EditAlarmDialogFragment.newInstance(id);
+                editDialog.show(fm, EDIT_ALARM_TAG);
             }
         });
     }

@@ -2,10 +2,12 @@ package com.brianysu.alarmclockx.alarm;
 
 import android.media.RingtoneManager;
 
+import java.util.Calendar;
+
 /**
  * Represents an alarm
  */
-public class AlarmModel {
+public class AlarmModel implements Comparable {
 
     // Refers to AlarmEntry ID in database
     int id;
@@ -95,5 +97,26 @@ public class AlarmModel {
     public boolean isRepeated(int dayOfWeek) {
         BinaryRepeatedDate b = new BinaryRepeatedDate(repeatedDays);
         return b.isRepeated(dayOfWeek);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        // these values are the current time
+        final int nowDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        final int nowHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        final int nowMinute = Calendar.getInstance().get(Calendar.MINUTE);
+
+        Calendar thisTime = Calendar.getInstance();
+        thisTime.set(Calendar.HOUR_OF_DAY, this.getHour());
+        thisTime.set(Calendar.MINUTE, this.getMin());
+        thisTime.set(Calendar.SECOND, 0);
+
+        AlarmModel oAlarm = (AlarmModel) o;
+        Calendar oTime = Calendar.getInstance();
+        oTime.set(Calendar.HOUR_OF_DAY, oAlarm.getHour());
+        oTime.set(Calendar.MINUTE, oAlarm.getMin());
+        oTime.set(Calendar.SECOND, 0);
+
+        return 0;
     }
 }

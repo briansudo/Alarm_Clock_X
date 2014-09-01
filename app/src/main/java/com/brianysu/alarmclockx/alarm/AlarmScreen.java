@@ -70,27 +70,7 @@ public class AlarmScreen extends Activity implements
 
         String tone = getIntent().getStringExtra(AlarmEntry.COLUMN_TONE);
         mPlayer = new MediaPlayer();
-//        Uri toneUri;
-//        try {
-//            if (tone != null && !tone.equals("")) {
-//                toneUri = Uri.parse(tone);
-//            } else {
-//                toneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-//            }
-//        } catch (Exception e) {
-//            toneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-//        }
-//        try {
-//            if (toneUri != null) {
-//                mPlayer.setDataSource(this, toneUri);
-//                mPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
-//                mPlayer.setLooping(true);
-//                mPlayer.prepare();
-//                mPlayer.start();
-//            }
-//        } catch (Exception e) {
-//            // do nothing
-//        }
+        // mPlayer = AlarmRingUtility.startAlarmRing(this, tone);
     }
 
 

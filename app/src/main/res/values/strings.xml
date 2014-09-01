@@ -45,4 +45,7 @@
     <string name="saturday">Sat</string>
     <string name="title_activity_alarm_screen">AlarmScreen</string>
 
+    <!-- Strings for EditAlarmDialog -->
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 </resources>

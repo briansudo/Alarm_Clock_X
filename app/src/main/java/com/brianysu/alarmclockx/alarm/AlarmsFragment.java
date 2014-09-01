@@ -90,7 +90,7 @@ public class AlarmsFragment extends Fragment implements LoaderManager.LoaderCall
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.fragment_alarms, container, false);
         ListView mListView = (ListView) mRootView.findViewById(R.id.listview_alarm);
-        mAdapter = new AlarmsAdapter(getActivity(), null, 0);
+        mAdapter = new AlarmsAdapter(getActivity(), null, 0, getFragmentManager());
         mListView.setAdapter(mAdapter);
         return mRootView;
     }

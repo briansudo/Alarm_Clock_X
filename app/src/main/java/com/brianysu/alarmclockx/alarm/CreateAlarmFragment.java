@@ -143,7 +143,8 @@ public class CreateAlarmFragment extends Fragment {
     }
 
     /**
-     * Create a new alarm based on the current values of the views.
+     * Create a new alarm based on the current values of the views. Then close the enclosing
+     * activity and retain to the MainActivity.
      */
     private void createNewAlarm() {
         EditText alarmEditText = (EditText) mRootView.findViewById(R.id.alarm_name_edittext);

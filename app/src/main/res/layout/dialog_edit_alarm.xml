@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textColorLink="@color/white"
+        style="@style/AppThemeText"
+        android:id="@+id/alarm_name_edittext"
+        android:hint="@string/create_alarm_name_hint"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TimePicker
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textColorLink="@color/white"
+        android:id="@+id/timePicker" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        style="@style/AppThemeText"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="@string/create_alarm_repeat"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:gravity="fill_horizontal">
+
+        <TextView
+            style="@style/DayOfWeekSelector"
+            android:id="@+id/sunday_selector_textview"
+            android:text="@string/create_alarm_sunday" />
+
+        <TextView
+            style="@style/DayOfWeekSelector"
+            android:id="@+id/monday_selector_textview"
+            android:text="@string/create_alarm_monday" />
+
+        <TextView
+            style="@style/DayOfWeekSelector"
+            android:id="@+id/tuesday_selector_textview"
+            android:text="@string/create_alarm_tuesday" />
+
+        <TextView
+            style="@style/DayOfWeekSelector"
+            android:id="@+id/wednesday_selector_textview"
+            android:text="@string/create_alarm_wednesday" />
+
+        <TextView
+            style="@style/DayOfWeekSelector"
+            android:id="@+id/thursday_selector_textview"
+            android:text="@string/create_alarm_thursday" />
+
+        <TextView
+            style="@style/DayOfWeekSelector"
+            android:id="@+id/friday_selector_textview"
+            android:text="@string/create_alarm_friday" />
+
+        <TextView
+            style="@style/DayOfWeekSelector"
+            android:id="@+id/saturday_selector_textview"
+            android:text="@string/create_alarm_saturday" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <LinearLayout
+        android:id="@+id/ringtone_selector_view"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:clickable="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceLarge"
+            style="@style/AppThemeText"
+            android:text="@string/create_alarm_ringtone"/>
+
+        <TextView
+            android:id="@+id/ringtone_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorSecondary"
+            style="@style/AppThemeText"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:text="@string/create_alarm_default"/>
+
+    </LinearLayout>
+
+</LinearLayout>

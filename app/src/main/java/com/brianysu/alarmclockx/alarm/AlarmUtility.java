@@ -299,6 +299,16 @@ public class AlarmUtility {
         return result;
     }
 
+    public static int updateAlarmInDb(Context context, ContentValues values, int id) {
+        int result = context.getContentResolver().update(
+                AlarmContract.AlarmEntry.CONTENT_URI,
+                values,
+                AlarmEntry._ID + " = '" + id + "'",
+                null
+        );
+        return result;
+    }
+
     /**
      * Enable the alarm in the alarm manager
      */

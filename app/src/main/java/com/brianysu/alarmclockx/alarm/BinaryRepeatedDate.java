@@ -1,7 +1,5 @@
 package com.brianysu.alarmclockx.alarm;
 
-import com.brianysu.alarmclockx.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +11,7 @@ import java.util.List;
  **/
 public class BinaryRepeatedDate {
 
-    int[] daysOfWeekStrings = {
-            R.string.sunday,
-            R.string.monday,
-            R.string.tuesday,
-            R.string.wednesday,
-            R.string.thursday,
-            R.string.friday,
-            R.string.saturday
-    };
+    private static final String TAG = BinaryRepeatedDate.class.getSimpleName();
 
     /** Representation of days repeated. **/
     private int days;
@@ -130,7 +120,8 @@ public class BinaryRepeatedDate {
 
     /** Returns true if dayOfWeek = Calendar.SUNDAY for example is repeated. **/
     public boolean isRepeated(int dayOfWeek) {
-        return (days & (Integer.parseInt("1000000") >>> (dayOfWeek - 1))) > 0;
+        int i = Integer.parseInt("1000000", 2) >>> (dayOfWeek - 1);
+        return (days & Integer.parseInt("1000000", 2) >>> (dayOfWeek - 1)) > 0;
     }
 
     @Override
