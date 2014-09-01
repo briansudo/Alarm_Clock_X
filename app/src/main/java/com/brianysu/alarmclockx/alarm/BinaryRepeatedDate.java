@@ -120,7 +120,6 @@ public class BinaryRepeatedDate {
 
     /** Returns true if dayOfWeek = Calendar.SUNDAY for example is repeated. **/
     public boolean isRepeated(int dayOfWeek) {
-        int i = Integer.parseInt("1000000", 2) >>> (dayOfWeek - 1);
         return (days & Integer.parseInt("1000000", 2) >>> (dayOfWeek - 1)) > 0;
     }
 

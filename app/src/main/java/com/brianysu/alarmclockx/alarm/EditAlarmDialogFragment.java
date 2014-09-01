@@ -56,7 +56,6 @@ public class EditAlarmDialogFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "On resume called");
     }
 
     @Override
@@ -168,7 +167,6 @@ public class EditAlarmDialogFragment extends DialogFragment {
         if (!mRepeated.isRepeated(day)) {
             dayTextView.setTextColor(getResources().getColor(android.R.color.secondary_text_dark));
         } else {
-            Log.d(TAG, "Day #" + day + " is repeating.");
             dayTextView.setTextColor(getResources().getColor(R.color.day_selected));
         }
     }
@@ -179,11 +177,9 @@ public class EditAlarmDialogFragment extends DialogFragment {
         if (mRepeated.isRepeated(day)) {
             mRepeated.setDate(day, false);
             dayTextView.setTextColor(getResources().getColor(android.R.color.secondary_text_dark));
-            Log.d(TAG, "Day #" + day + " turned off.");
         } else {
             mRepeated.setDate(day, true);
             dayTextView.setTextColor(getResources().getColor(R.color.day_selected));
-            Log.d(TAG, "Day #" + day + " turned on.");
         }
     }
 
